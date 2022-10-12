@@ -3,11 +3,12 @@ import List from "./List";
 import { getPosts, getCategories } from "../api";
 import Pagination from "./Pagination";
 import './App.css';
+import { Loading } from "./loading";
 
 function Posts() {
     // Init
     const [items, setItems] = useState([]);
-    const [DataisLoaded, setDataisLoaded] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     // Category filter
     const [selected, setSelected] = useState("");
@@ -29,7 +30,7 @@ function Posts() {
             setItems(result);
             setCurrentPosts(result.posts.slice(indexOfFirstPost, indexOfLastPost));
             setNpages(Math.ceil(result.posts.length / postsPerPage));
-            setDataisLoaded(true);
+            setLoading(true);
         })
         if (categories.length === 0) {
             getCategories().then((result) => {
@@ -40,28 +41,24 @@ function Posts() {
 
     useEffect(() => {
         if (indexOfLastPost) {
+            setLoading(false);
             getPosts().then((result) => {
                 setItems(result);
                 setCurrentPosts(result.posts.slice(indexOfFirstPost, indexOfLastPost));
-                setDataisLoaded(true);
+                setLoading(true);
             })
         } 
         if (selected) {
+            setLoading(false);
             getPosts().then((result) => {
                 setItems(result);
                 const selectedItems = result.posts.filter(post => post.categories.map(category => category.name).includes(selected)).slice(indexOfFirstPost, indexOfLastPost);
                 setCurrentPosts(selectedItems);
                 setNpages(Math.ceil(selectedItems.length / postsPerPage));
-                setDataisLoaded(true);
+                setLoading(true);
             })
         }
     }, [indexOfFirstPost, indexOfLastPost, selected])
-
-    useEffect(() => {
-        if (currentPosts) {
-            console.log("a")
-        }
-    }, [setCurrentPosts])
 
     function handleClick(category) {
         if (category === "") {
@@ -73,13 +70,12 @@ function Posts() {
         }
     }
 
-    if (!DataisLoaded) return <div>
-        <h1> Please wait some time.... </h1> </div>;
+    if (!loading) return <Loading />;
     return (
         <div className="posts">
             <div className="CategoryFilter">
                 <h2> Filter by category </h2>
-                <select onChange={(event) => handleClick(event.target.value)}>
+                <select value={selected} onChange={(event) => handleClick(event.target.value)}>
                     <option value="">
                         All
                     </option>
