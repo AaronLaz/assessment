@@ -3,7 +3,7 @@ import dateFormat from 'dateformat';
 import "./App.css";
 
 const Post = (props) => {
-    const [post, setPost] = useState(props);
+    const [post] = useState(props);
     return (
         <div>
             <pre>
