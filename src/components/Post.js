@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import dateFormat from 'dateformat';
 import "./App.css";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Post = (props) => {
     const [post, setPost] = useState(props);
     const categories = props.categories.map((category) => category.name);
-    const uniqueCategories = categories.filter((x,i) => categories.indexOf(x) === i);
+    const uniqueCategories = categories.filter((x, i) => categories.indexOf(x) === i);
+
+    const history = useHistory();
+
+    const navDetail = (id) => {
+        const url = `/${id}/detail`;
+        history.push(url);
+    }
+
     return (
         <div className="card">
             <div>
@@ -27,10 +36,7 @@ const Post = (props) => {
                     ))}
                 </div>
             </div>
-            {/* Summary might not be necessary in the list, might add to detail page */}
-            {/* <pre>
-                  Summary: { post.summary }
-                </pre>               */}
+            <button className="detailButton" onClick={() => navDetail(post.id)}> Detail </button>
         </div>
     );
 };

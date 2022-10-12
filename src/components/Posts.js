@@ -8,7 +8,7 @@ import { Loading } from "./loading";
 function Posts() {
     // Init
     const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     // Category filter
     const [selected, setSelected] = useState("");
@@ -23,7 +23,7 @@ function Posts() {
 
     const [currentPosts, setCurrentPosts] = useState([]);
 
-    const [nPages,setNpages] = useState(1);
+    const [nPages, setNpages] = useState(1);
 
     useEffect(() => {
         getPosts().then((result) => {
@@ -37,7 +37,7 @@ function Posts() {
                 setCategories(result);
             })
         }
-    }, []); 
+    }, []);
 
     useEffect(() => {
         if (indexOfLastPost) {
@@ -47,7 +47,7 @@ function Posts() {
                 setCurrentPosts(result.posts.slice(indexOfFirstPost, indexOfLastPost));
                 setLoading(true);
             })
-        } 
+        }
         if (selected) {
             setLoading(false);
             getPosts().then((result) => {
@@ -79,15 +79,15 @@ function Posts() {
                     <option value="">
                         All
                     </option>
-                    {categories.map(category => 
+                    {categories.map(category =>
                         <option key={category} value={category}>
                             {category}
                         </option>
                     )}
                 </select>
-                
+
             </div>
-            <List 
+            <List
                 currentPosts={currentPosts}
                 selected={selected}
             />

@@ -6,7 +6,7 @@ const Pagination = (props) => {
     const pageNumbers = [...Array(props.nPages + 1).keys()].slice(1);
 
     const nextPage = () => {
-        if (props.currentPage !== props.nPages){
+        if (props.currentPage !== props.nPages) {
             const test = props.currentPage + 1;
             props.setCurrentPage(test);
             const test2 = test * props.postsPerPage;
@@ -17,14 +17,14 @@ const Pagination = (props) => {
     }
 
     const prevPage = () => {
-        if (props.currentPage !== 1){
+        if (props.currentPage !== 1) {
             const test = props.currentPage - 1;
             props.setCurrentPage(test);
             const test2 = test * props.postsPerPage;
             props.setIndexOfLastPost(test2);
             const test3 = test2 - props.postsPerPage;
             props.setIndexOfFirstPost(test3);
-        }      
+        }
     }
 
     return (
@@ -34,7 +34,7 @@ const Pagination = (props) => {
             </div>
             {
                 pageNumbers.map(pgNumber => (
-                    <div 
+                    <div
                         key={pgNumber}
                         className={`page-item ${props.currentPage === pgNumber ? 'active' : ''}`}
                         onClick={() => {
@@ -43,7 +43,7 @@ const Pagination = (props) => {
                             props.setIndexOfLastPost(test2);
                             const test3 = test2 - props.postsPerPage;
                             props.setIndexOfFirstPost(test3);
-                    }}>
+                        }}>
                         {pgNumber}
                     </div>
                 ))
