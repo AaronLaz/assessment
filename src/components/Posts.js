@@ -45,7 +45,16 @@ function Posts() {
                 setDataisLoaded(true);
             })
         } 
-    }, [indexOfFirstPost, indexOfLastPost])
+        if (selected) {
+            getPosts().then((result) => {
+                setItems(result);
+                const selectedItems = result.posts.filter(post => post.categories.map(category => category.name).includes(selected)).slice(indexOfFirstPost, indexOfLastPost);
+                setCurrentPosts(selectedItems);
+                setNpages(Math.ceil(selectedItems.length / postsPerPage));
+                setDataisLoaded(true);
+            })
+        }
+    }, [indexOfFirstPost, indexOfLastPost, selected])
 
     useEffect(() => {
         if (currentPosts) {
@@ -56,6 +65,7 @@ function Posts() {
     function handleClick(category) {
         if (selected === category) {
             setSelected(""); //reset
+            setNpages(Math.ceil(items.posts.length / postsPerPage));
         }
         else {
             setSelected(category);

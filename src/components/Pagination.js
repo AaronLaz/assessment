@@ -22,10 +22,8 @@ const Pagination = (props) => {
             props.setCurrentPage(test);
             const test2 = test * props.postsPerPage;
             props.setIndexOfLastPost(test2);
-            console.log("last : ",test2);
             const test3 = test2 - props.postsPerPage;
             props.setIndexOfFirstPost(test3);
-            console.log("first : ",test3);
         }      
     }
 
@@ -40,7 +38,7 @@ const Pagination = (props) => {
                 {
                     pageNumbers.map(pgNumber => (
                         <li key={pgNumber} className={`page-item ${props.currentPage === pgNumber ? 'active' : ''}`}>
-                            <a hidden={props.currentPage === pgNumber} className="page-link" onClick={() => {
+                            <a className="page-link" onClick={() => {
                                 props.setCurrentPage(pgNumber);
                                 const test2 = pgNumber * props.postsPerPage;
                                 props.setIndexOfLastPost(test2);
