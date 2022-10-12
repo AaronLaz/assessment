@@ -5,7 +5,7 @@ const List = (props) => {
     return(
         <div className="PostDisplay">
             {props.currentPosts.map(post => (
-                <ol key={post.id}>
+                <div key={post.id}>
                     <Post id={post.id}
                         title={post.title}
                         publishDate={post.publishDate}
@@ -13,7 +13,7 @@ const List = (props) => {
                         summary={post.summary}
                         categories={post.categories}
                     />
-                </ol>
+                </div>
             ))}
         </div>
     );

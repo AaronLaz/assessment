@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import List from "./List";
 import { getPosts, getCategories } from "../api";
 import Pagination from "./Pagination";
+import './App.css';
 
 function Posts() {
     // Init
@@ -14,7 +15,7 @@ function Posts() {
 
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const postsPerPage = 10;
+    const postsPerPage = 9;
 
     const [indexOfLastPost, setIndexOfLastPost] = useState(9);
     const [indexOfFirstPost, setIndexOfFirstPost] = useState(0);
@@ -63,7 +64,7 @@ function Posts() {
     }, [setCurrentPosts])
 
     function handleClick(category) {
-        if (selected === category) {
+        if (category === "") {
             setSelected(""); //reset
             setNpages(Math.ceil(items.posts.length / postsPerPage));
         }
@@ -75,10 +76,20 @@ function Posts() {
     if (!DataisLoaded) return <div>
         <h1> Please wait some time.... </h1> </div>;
     return (
-        <div className="Posts">
+        <div className="posts">
             <div className="CategoryFilter">
                 <h2> Filter by category </h2>
-                {categories.map(category => <ol key={category}> <div onClick={() => { handleClick(category) }} className={category === selected ? "selected" : "category"}>{category}</div> </ol>)}
+                <select onChange={(event) => handleClick(event.target.value)}>
+                    <option value="">
+                        All
+                    </option>
+                    {categories.map(category => 
+                        <option key={category} value={category}>
+                            {category}
+                        </option>
+                    )}
+                </select>
+                
             </div>
             <List 
                 currentPosts={currentPosts}

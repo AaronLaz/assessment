@@ -1,7 +1,94 @@
-.selected{
-    color: greenyellow;
+body {
+    background-color: #24eba3;
+    padding: 20px;
 }
 
-.category{
-    color: black;
+.app {
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: rgb(255,255,255,0.9);
+    padding: 20px;
+}
+
+.title {
+    color: #5c5aea;
+}
+
+/* greenLizard : #24eba3 */
+/* purpleLizard : #5c5aea */
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.PostDisplay {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border: 1px solid black;
+    width: 300px;
+    height: 400px;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-weight: bold;
+    padding: 0;
+}
+
+.card-author {
+    font-style: italic;
+    padding: 0;
+}
+
+.categories-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.category-tag {
+    font: 11px;
+    padding: 5px;
+    border-radius: 5px;
+    color: aliceblue;
+    font-weight: 600;
+    background-color: #5c5aea;
+    padding: 2px;
+}
+
+.pagination-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.712);
+}
+
+.page-item {
+    cursor: pointer;
+}
+
+.page-item:hover {
+    cursor: pointer;
+    color: blue;
+}
+
+.active {
+    color: #5c5aea;
 }

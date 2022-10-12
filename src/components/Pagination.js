@@ -28,35 +28,30 @@ const Pagination = (props) => {
     }
 
     return (
-        <nav>
-            <ul className="pagination justify-content-center">
-                <li className="page-item">
-                    <a className="page-link" onClick={() => prevPage()} href='#'>
-                        Previous
-                    </a>
-                </li>
-                {
-                    pageNumbers.map(pgNumber => (
-                        <li key={pgNumber} className={`page-item ${props.currentPage === pgNumber ? 'active' : ''}`}>
-                            <a className="page-link" onClick={() => {
-                                props.setCurrentPage(pgNumber);
-                                const test2 = pgNumber * props.postsPerPage;
-                                props.setIndexOfLastPost(test2);
-                                const test3 = test2 - props.postsPerPage;
-                                props.setIndexOfFirstPost(test3);
-                            }} href='#'>
-                                {pgNumber}
-                            </a>
-                        </li>
-                    ))
-                }
-                <li className="page-item">
-                    <a className="page-link" onClick={() => nextPage()} href='#'>
-                        Next
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <div className="pagination-items">
+            <div className="page-item" onClick={() => prevPage()}>
+                Previous
+            </div>
+            {
+                pageNumbers.map(pgNumber => (
+                    <div 
+                        key={pgNumber}
+                        className={`page-item ${props.currentPage === pgNumber ? 'active' : ''}`}
+                        onClick={() => {
+                            props.setCurrentPage(pgNumber);
+                            const test2 = pgNumber * props.postsPerPage;
+                            props.setIndexOfLastPost(test2);
+                            const test3 = test2 - props.postsPerPage;
+                            props.setIndexOfFirstPost(test3);
+                    }}>
+                        {pgNumber}
+                    </div>
+                ))
+            }
+            <div className="page-item" onClick={() => nextPage()}>
+                Next
+            </div>
+        </div>
     );
 }
 
