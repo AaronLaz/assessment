@@ -17,3 +17,22 @@ export async function getPosts() {
         }
     });
 }
+
+export async function getCategories() {
+    return new Promise((resolve, reject) => {
+        try {
+            const url = "https://localhost:3000/api/categories";
+            const config = {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            };
+            axios.get(url, config).then((categories) => {
+                resolve(categories.data);
+            });
+        } catch(err) {
+            reject(err);
+        }
+    });
+}
