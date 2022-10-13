@@ -3,13 +3,16 @@ import dateFormat from 'dateformat';
 import "./App.css";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
+// Component to display a post in the form of a card
 const Post = (props) => {
+    // Initialise the posts in a state
     const [post, setPost] = useState(props);
+    // Filter the categories to remove the duplicates
     const categories = props.categories.map((category) => category.name);
     const uniqueCategories = categories.filter((x, i) => categories.indexOf(x) === i);
-
+    // Router
     const history = useHistory();
-
+    // Navigate to the detail page with the router
     const navDetail = (id) => {
         const url = `/${id}/detail`;
         history.push(url);

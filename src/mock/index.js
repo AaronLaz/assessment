@@ -20,7 +20,7 @@ createServer({
       return allCategories;
     });
 
-    // retrieving specific post
+    // retrieving specific post with a unique id
     this.get('/post/:id', (schema, request) => {
       const id = request.params.id;
       var post = data.posts.filter(post => post.id.match(id))[0];

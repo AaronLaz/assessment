@@ -1,8 +1,10 @@
 import React from "react";
 import Post from "./Post";
 
+
+// Mapping the posts into the post component
 const List = (props) => {
-    return(
+    return (
         <div className="PostDisplay">
             {props.currentPosts.map(post => (
                 <div key={post.id}>
@@ -18,5 +20,5 @@ const List = (props) => {
         </div>
     );
 }
-    
+
 export default List;

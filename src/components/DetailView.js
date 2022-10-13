@@ -6,15 +6,23 @@ import { getPost } from "../api";
 import { Loading } from "./loading";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
+// Same as the posts component, with the summary being displayed in addition
 function DetailView() {
-    const { id } = useParams();
-    const [post, setPost] = useState();
-    const [loading, setLoading] = useState(false);
-    const [uniqueCategories, setUniqueCategories] = useState([]);
 
+    // initializing states
+    const [post, setPost] = useState();
+    const [uniqueCategories, setUniqueCategories] = useState([]);
+    // loading component state
+    const [loading, setLoading] = useState(false);
+    // Retrieve the id of the post that will be used by the api
+    const { id } = useParams();
+
+
+    // Router
     const history = useHistory();
 
     useEffect(() => {
+        //  Retrieve the post based on the id, then filter out the duplicate categories if they exist
         getPost(id).then((result) => {
             setPost(result);
             let temp_categories = result.categories.map((category) => category.name);
@@ -23,11 +31,13 @@ function DetailView() {
             setTimeout(() => setLoading(true), 2000);
         })
     }, []);
-
+    // loading component
     if (!loading) return <Loading />;
+    // main component
     return (
         <div>
             <h2> Post Detail </h2>
+            {/* Router to return to the home page */}
             <button className="homeButton" onClick={() => history.push('/')}>Back home</button>
             <div className="cardDetail">
                 <div>
